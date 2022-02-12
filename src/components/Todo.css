@@ -1,0 +1,24 @@
+.todo__list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 800px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px !important;
+  transition: box-shadow 0.3s;
+  padding: 10px;
+}
+.todo__list:hover {
+  cursor: pointer;
+  box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
+}
+.todo__delete {
+  cursor: pointer;
+  color: #d61f26;
+  transition: color 0.3s;
+}
+
+.todo__delete:hover {
+  color: red;
+}
