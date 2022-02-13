@@ -9,14 +9,19 @@ function App() {
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState("");
   useEffect(() => {
-    const querySnapshot = getDocs(collection(db, "todos")).then((item) =>
-      setTodos(item.docs.map((item) => ({ id: item.id, value: item.data() })))
-    );
-  }, [todos]);
+    getDatabase();
+  }, []);
+
+  const getDatabase = () => {
+    getDocs(collection(db, "todos")).then((item) => {
+      setTodos(item.docs.map((item) => ({ id: item.id, value: item.data() })));
+    });
+  };
   const addTodo = (e) => {
     e.preventDefault();
     try {
       const docRef = addDoc(collection(db, "todos"), { todo: input });
+      getDatabase();
       console.log("Document written with ID: ", docRef.id);
     } catch (e) {
       console.error("Error adding document: ", e);
@@ -44,7 +49,7 @@ function App() {
       </form>
       <ul>
         {todos.map((todo) => (
-          <Todo key={todo.id} todo={todo} />
+          <Todo key={todo.id} todo={todo} getDatabase={getDatabase} />
         ))}
       </ul>
     </div>

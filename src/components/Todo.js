@@ -12,7 +12,7 @@ import {
 
 import React from "react";
 
-const Todo = ({ todo }) => {
+const Todo = ({ todo, getDatabase }) => {
   return (
     <List className="todo__list">
       <ListItem>
@@ -22,7 +22,10 @@ const Todo = ({ todo }) => {
       <DeleteForeverIcon
         className="todo__delete"
         fontSize="large"
-        onClick={() => deleteDoc(doc(db, "todos", todo.id))}
+        onClick={() => {
+          deleteDoc(doc(db, "todos", todo.id));
+          getDatabase();
+        }}
       />
     </List>
   );
